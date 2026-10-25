@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portafoli · Mòdul 9. Gestió de conflictes · Sandra Vallès</title>
+<meta name="description" content="Portafoli del mòdul de gestió de conflictes del curs de formació inicial per a l'exercici de la funció directiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B1710;--muted:#6A4A3E;--panel:rgba(255,251,246,.9);--line:rgba(43,23,16,.14);
+  --yellow:#FFD23F;--coral:#E8553D;--nav:rgba(255,244,234,.78);
+  --bg:linear-gradient(165deg,#FF8E6E 0%,#FFB48C 48%,#FFDDBF 100%);
+  --disp:"Space Grotesk","Helvetica Neue",Arial,sans-serif;--body:Inter,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#FBEFE6;--muted:#D9B9A8;--panel:rgba(44,24,28,.9);--line:rgba(251,239,230,.16);--nav:rgba(36,18,24,.8);
+  --bg:linear-gradient(165deg,#5C2433 0%,#7A3A3A 50%,#9A5B45 100%)}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;min-height:100vh;background:var(--bg) fixed;color:var(--ink);font:400 1.0625rem/1.7 var(--body);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* fixed nav with breadcrumb */
+.top{position:fixed;inset:0 0 auto 0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:calc(.7rem + env(safe-area-inset-top,0px)) 1.25rem .7rem}
+.top div{max-width:60rem;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;font:500 .92rem var(--body)}
+.crumb{color:var(--muted)}.crumb a{text-decoration:none;border-bottom:1px solid currentColor}.crumb a:hover,.crumb a:focus-visible{color:var(--ink)}.crumb b{color:var(--ink);font-weight:600}
+.top nav{display:flex;gap:1.1rem}
+.top nav a{text-decoration:none;border-bottom:2px solid transparent}
+.top nav a:hover,.top nav a:focus-visible{border-color:var(--ink)}
+@media (max-width:560px){.crumb .hide{display:none}.top nav{gap:.8rem}}
+
+main{max-width:60rem;margin:0 auto;padding:0 1.25rem 4rem}
+.hero{padding:9rem 0 4rem}
+.hero p.tag{display:inline-block;margin:0 0 1.2rem;background:var(--yellow);color:#2B1710;font:600 .95rem var(--body);padding:.3rem .8rem;border-radius:999px;transform:rotate(-2deg)}
+h1{font:700 clamp(2.6rem,8vw,5.2rem)/1 var(--disp);letter-spacing:-.03em;margin:0 0 1.2rem;max-width:16ch}
+.hero .sub{font:400 1.2rem/1.5 var(--body);max-width:34rem;margin:0}
+.hero .sub strong{font-weight:600}
+
+section{margin:0 0 3rem;background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:clamp(1.4rem,4vw,3rem);
+  box-shadow:0 30px 60px -30px rgba(43,23,16,.45)}
+h2{font:700 clamp(1.8rem,4vw,2.5rem)/1.1 var(--disp);letter-spacing:-.02em;margin:0 0 1.5rem}
+h3{font:700 1.25rem/1.3 var(--disp);margin:2rem 0 .6rem}
+p{margin:0 0 1rem;max-width:42rem}
+ul.plain{padding-left:1.2rem;margin:0 0 1rem;max-width:42rem}ul.plain li{margin-bottom:.5rem}
+mark{background:var(--yellow);color:#2B1710;padding:.05rem .35rem;border-radius:4px;outline:1px dashed rgba(43,23,16,.5)}
+
+/* personal snapshot and measurable goal */
+.snapshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin:1rem 0 1.5rem}
+.snapshot{background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.12);border-radius:16px;padding:1.1rem 1.2rem}
+.snapshot h4{font:700 1rem/1.3 var(--disp);margin:0 0 .55rem}
+.snapshot ul{margin:0;padding-left:1.15rem}
+.snapshot li{margin:.3rem 0}
+.goal{background:#FFF3C2;color:#2B1710;border:1px solid rgba(43,23,16,.12);border-left:6px solid #E8553D;border-radius:18px;padding:1.25rem 1.4rem;margin:1.2rem 0}
+.goal .eyebrow{display:block;text-transform:uppercase;letter-spacing:.09em;font:700 .78rem var(--body);color:#9B3F2E;margin-bottom:.45rem}
+.goal p{margin:0;max-width:48rem}
+.goal strong{color:#2B1710}
+
+
+/* timeline */
+.tl{list-style:none;margin:0 0 1.2rem;padding:0 0 0 1.6rem;border-left:3px solid var(--ink);max-width:42rem}
+.tl li{position:relative;padding:0 0 1.2rem}
+.tl li::before{content:"";position:absolute;left:-2.15rem;top:.4rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
+.tl b{display:block;font:700 1.15rem var(--disp)}
+.tl span{color:var(--muted)}
+
+/* tilted technique cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:1.4rem;margin:1.5rem 0 1rem;padding:.5rem}
+.card{margin:0;background:#FFFDF9;color:#2B1710;border-radius:18px;padding:1.2rem 1.3rem 1.3rem;border:1px solid rgba(43,23,16,.12);
+  box-shadow:0 18px 30px -14px rgba(43,23,16,.5);transform:rotate(var(--r,0deg));transition:transform .3s ease,box-shadow .3s ease}
+.card:hover,.card:focus-within{transform:rotate(0) translateY(-4px);box-shadow:0 26px 40px -16px rgba(43,23,16,.55)}
+.card .t{display:inline-block;background:var(--yellow);font:700 .9rem var(--disp);padding:.15rem .6rem;border-radius:6px;margin-bottom:.4rem}
+.card small{display:block;color:#6A4A3E;font:500 .88rem var(--body);margin-bottom:.6rem}
+.card q{display:block;font:500 1.05rem/1.5 var(--body);quotes:"«" "»"}
+.note{color:var(--muted)}
+
+/* links */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;list-style:none;padding:0;margin:0}
+.links a{display:block;height:100%;text-decoration:none;background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.14);border-radius:16px;padding:1rem 1.1rem;
+  font:700 1.05rem/1.3 var(--disp);transition:background .2s,transform .2s}
+.links a:hover,.links a:focus-visible{background:var(--yellow);transform:translateY(-3px)}
+.links small{display:block;font:400 .9rem var(--body);color:#6A4A3E;margin-top:.25rem}
+
+/* reveal on scroll (only when JS runs and motion is allowed) */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.card{transition:none}html{scroll-behavior:auto}}
+@media (max-width:560px){.hero{padding-top:7rem}.card{transform:rotate(calc(var(--r,0deg)/2))}}
+
+/* module 9 additions */
+.card .txt{margin:0;font:500 1.02rem/1.5 var(--body);max-width:none}
+ol.flow{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:.9rem 0 0;counter-reset:s}
+ol.flow li{counter-increment:s;background:#FFF3C2;border:1px solid rgba(43,23,16,.14);border-radius:12px;padding:.35rem .7rem;font:600 .9rem var(--body)}
+ol.flow li::before{content:counter(s) ". ";color:#9B3F2E;font-weight:700}
+.sub-h{font:600 1rem var(--body);color:var(--muted);margin:0 0 .6rem}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="top"><div>
+  <span class="crumb"><a href="index.html">Portafoli</a> <span class="hide">/ Mòdul 9</span> / <b id="here">Inici</b></span>
+  <nav aria-label="Seccions"><a href="#idees">Idees clau</a><a href="#practica">Pràctica</a><a href="#materials">Materials</a></nav>
+</div></header>
+
+<main>
+<div class="hero" data-sec="Inici">
+  <p class="tag">Portafoli DIN2 · Formació inicial per a l'exercici de la funció directiva</p>
+  <h1>Mòdul 9. Gestió de conflictes</h1>
+  <p class="sub"><strong>Sandra Vallès</strong> · Cap d'estudis</p>
+</div>
+
+<section id="idees" data-sec="Idees clau" class="rv">
+<h2>Idees clau del mòdul</h2>
+
+<h3>Comprendre el conflicte</h3>
+<p>Hem diferenciat entre conflicte i assetjament escolar i hem analitzat diversos exemples per decidir de quin dels dos es tractava.</p>
+<div class="snapshot-grid">
+  <div class="snapshot"><h4>Conflicte</h4><ul>
+    <li>Discrepància o enfrontament, sovint puntual.</li>
+    <li>Forma part de la convivència.</li>
+    <li>Es pot gestionar amb diàleg, mediació i acords.</li></ul></div>
+  <div class="snapshot"><h4>Assetjament escolar</h4><ul>
+    <li>Fenomen social sostingut en el temps.</li>
+    <li>Violència física o psicològica en l'entorn educatiu.</li>
+    <li>Desequilibri de poder entre els rols.</li>
+    <li>Intencionat i reiterat.</li></ul></div>
+</div>
+<p>Segons el protocol del Departament d'Educació, l'assetjament és el maltractament físic o psicològic d'un alumne o grup contra un company dins l'àmbit escolar, de manera repetida, intencionada i amb abús de poder. Un episodi aïllat, per tant, no és assetjament perquè li falta la reiteració.</p>
+
+<h3>Estratègies d'intervenció</h3>
+<div class="cards">
+  <figure class="card" style="--r:-1.5deg"><span class="t">Conduir una conversa</span><small>Quan un docent enfadat vol explicar-me un conflicte</small><p class="txt">Preparar, escoltar, comunicar amb claredat, acordar i decidir. Empatia no vol dir donar la raó ni acceptar totes les demandes, i no cal respondre fins haver reflexionat.</p></figure>
+  <figure class="card" style="--r:1.5deg"><span class="t">Circuit d'actuació</span><small>Davant qualsevol violència en l'àmbit educatiu</small><ol class="flow"><li>Detecció i identificació</li><li>Valoració</li><li>Comunicació</li></ol></figure>
+  <figure class="card" style="--r:-1deg"><span class="t">REVA</span><small>Registre de Violències contra l'Alumnat</small><p class="txt">Registre unificat on els centres comuniquen les situacions de violència. Només s'hi registra quan correspon, quan no es pot solucionar des del claustre.</p></figure>
+  <figure class="card" style="--r:2deg"><span class="t">Violència sexual entre l'alumnat</span><small>Actuació específica</small><p class="txt">Té una actuació específica, amb el seu propi protocol d'intervenció.</p></figure>
+  <figure class="card" style="--r:-2deg"><span class="t">Òrgans del centre</span><small>CAEI, comissió de convivència i COCOBE</small><p class="txt">A la COCOBE hi ha d'haver homes i dones.</p></figure>
+</div>
+
+<h3>Gestió de personal i prevenció</h3>
+<p class="sub-h">A l'última sessió, amb la visita de l'inspector:</p>
+<ul class="plain">
+  <li>Gestionar un conflicte no és el mateix que resoldre'l.</li>
+  <li>L'inspector va explicar els tres tipus d'avaluació docent: el docent novell, l'interí i el funcionari en pràctiques.</li>
+  <li>Els conflictes poden acabar en procediments administratius (queixa, expedient…): la direcció ha de conèixer la normativa.</li>
+  <li>La prevenció és clau: un bon clima i un bon pla d'acollida del professorat nou.</li>
+</ul>
+<p class="sub-h">Per garantir la qualitat del servei es pot actuar a tres nivells:</p>
+<div class="snapshot-grid">
+  <div class="snapshot"><h4>1r nivell</h4><ul>
+    <li>Pla d'acollida del docent.</li>
+    <li>Pla de formació.</li>
+    <li>Observació entre iguals i pràctica reflexiva.</li></ul></div>
+  <div class="snapshot"><h4>2n nivell · específic</h4><ul>
+    <li>Pla de millora, quan és necessari.</li></ul></div>
+  <div class="snapshot"><h4>3r nivell · extraordinari</h4><ul>
+    <li>Avaluació negativa PPI.</li>
+    <li>Curs d'Iniciació a la Tasca Docent.</li>
+    <li>Expedient contradictori no disciplinari.</li></ul></div>
+</div>
+<p>La manera com comunica la direcció influeix en la cultura comunicativa del centre.</p>
+</section>
+
+<section id="practica" data-sec="Pràctica" class="rv">
+<h2>Del mòdul a la pràctica</h2>
+
+<h3>Una situació del meu centre: publicacions anònimes a les xarxes</h3>
+<p>Un compte anònim a les xarxes socials va publicar continguts greus contra membres de l'equip docent i contra l'alumnat. No era un conflicte entre dues parts que es pogués mediar, sinó una situació de violència que calia afrontar amb els canals oficials.</p>
+
+<h3>Com vam intervenir</h3>
+<div class="snapshot-grid">
+  <div class="snapshot"><h4>Via policial</h4><ul><li>Contacte amb les forces de seguretat i tramitació de la denúncia, perquè els fets poden ser delictes greus.</li></ul></div>
+  <div class="snapshot"><h4>Via administrativa</h4><ul><li>Informació oficial a la Inspecció Educativa.</li></ul></div>
+  <div class="snapshot"><h4>Famílies i alumnat</h4><ul><li>Comunicat a totes les famílies per eliminar els continguts i advertir de les conseqüències penals i disciplinàries de crear, compartir o comentar les publicacions.</li></ul></div>
+</div>
+<p>Al claustre, la direcció va començar amb el rebuig dels fets i el suport a les persones afectades, va explicar les accions en marxa i va demanar que se'ns comuniqués de seguida qualsevol novetat.</p>
+
+<h3>Anàlisi a partir del mòdul</h3>
+<ul class="plain">
+  <li><strong>Conflicte o violència.</strong> Hi havia atacs contra l'honor, la dignitat i la imatge de persones, no una discrepància. Per això no calia mediar, sinó activar el circuit: detectar i identificar, valorar i comunicar.</li>
+  <li><strong>Comunicació de la direcció.</strong> La manera de comunicar marca la cultura del centre. Vam posar primer el suport a les persones afectades, després les accions amb claredat, i vam acabar demanant la col·laboració del claustre.</li>
+  <li><strong>Prevenció.</strong> El mòdul insisteix que prevenir és tan important com intervenir: aquest cas mostra que la convivència també es juga a les xarxes.</li>
+</ul>
+<p><mark>[Què faries diferent ara, o què t'ha ensenyat el mòdul sobre aquesta situació.]</mark></p>
+
+<h3>Canvis concrets al centre</h3>
+<ul class="plain">
+  <li>Penjar a la sala de professorat el catàleg de protocols davant la violència en l'àmbit educatiu (XTEC).</li>
+  <li>Preparar un pla d'acollida del professorat nou: rebuda de la direcció, explicació extensa del centre i evitar que entri a classe just en començar.</li>
+  <li><mark>[Un tercer canvi o una acció pròpia, si en tens.]</mark></li>
+</ul>
+
+<div class="goal">
+  <span class="eyebrow">Idea clau</span>
+  <p><strong>Prevenir, conduir i conèixer la normativa.</strong> La direcció marca la cultura comunicativa del centre: preparar les converses i no respondre fins haver reflexionat.</p>
+</div>
+</section>
+
+<section id="materials" data-sec="Materials" class="rv">
+<h2>Materials i evidències</h2>
+<ul class="links">
+  <li><a href="https://xtec.gencat.cat/ca/centres/projeducatiu/convivencia/protocols/" target="_blank" rel="noopener">Protocols de convivència<small>XTEC · Catàleg de protocols</small></a></li>
+  <li><a href="https://documents.espai.educacio.gencat.cat/IPCNormativa/DOIGC/DOIGC_Gestio.pdf" target="_blank" rel="noopener">DOIGC · Gestió<small>Documents per a l'organització i la gestió dels centres</small></a></li>
+  <li><a href="https://portaljuridic.gencat.cat/ca/document-del-pjur/?documentId=403808" target="_blank" rel="noopener">Normativa<small>Portal Jurídic de Catalunya</small></a></li>
+  <li><a href="https://xtec.gencat.cat/ca/centres/projeducatiu/convivencia/una-comunitat-educativa-restaurativa-i-resilient/" target="_blank" rel="noopener">Comunitat educativa restaurativa i resilient<small>XTEC</small></a></li>
+  <li><a href="https://xtec.gencat.cat/web/.content/centres/projeducatiu/convivencia/una-comunitat-educativa-restaurativa-i-resilient/comunicacio-noviolenta-cnv/Comunicacio-NoViolenta_PE.pdf" target="_blank" rel="noopener">Comunicació no violenta<small>XTEC · PDF</small></a></li>
+  <li><a href="https://www.youtube.com/watch?v=ASkFkkBkNoU" target="_blank" rel="noopener">Pràctiques restauratives a l'escola<small>Vídeo de Mediemos</small></a></li>
+  <li><a href="http://www.xtec.cat/se-conca/Carme%20Boqu%E9.pdf" target="_blank" rel="noopener">Mediació escolar<small>M. Carme Boqué · XTEC, PDF</small></a></li>
+  <li><a href="https://educrea.cl/el-arbitraje-una-herramienta-para-la-buena-convivencia/" target="_blank" rel="noopener">El arbitraje, una herramienta para la buena convivencia<small>Educrea · Article</small></a></li>
+</ul>
+</section>
+</main>
+
+<script>
+(function(){
+  var here=document.getElementById('here');
+  var secs=[].slice.call(document.querySelectorAll('[data-sec]'));
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});return}
+  var reveal=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');reveal.unobserve(e.target)}})},{threshold:.08});
+  document.querySelectorAll('.rv').forEach(function(e){reveal.observe(e)});
+  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){here.textContent=e.target.getAttribute('data-sec')}})},{rootMargin:'-35% 0px -55% 0px'});
+  secs.forEach(function(s){spy.observe(s)});
+})();
+</script>
+</body>
+</html>
