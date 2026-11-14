@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portafoli · Mòdul 10. Gestió del temps · Sandra Vallès</title>
+<meta name="description" content="Portafoli del mòdul de gestió del temps del curs de formació inicial per a l'exercici de la funció directiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2B1710;--muted:#6A4A3E;--panel:rgba(255,251,246,.9);--line:rgba(43,23,16,.14);
+  --yellow:#FFD23F;--coral:#E8553D;--nav:rgba(255,244,234,.78);
+  --bg:linear-gradient(165deg,#FF8E6E 0%,#FFB48C 48%,#FFDDBF 100%);
+  --disp:"Space Grotesk","Helvetica Neue",Arial,sans-serif;--body:Inter,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --ink:#FBEFE6;--muted:#D9B9A8;--panel:rgba(44,24,28,.9);--line:rgba(251,239,230,.16);--nav:rgba(36,18,24,.8);
+  --bg:linear-gradient(165deg,#5C2433 0%,#7A3A3A 50%,#9A5B45 100%)}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;min-height:100vh;background:var(--bg) fixed;color:var(--ink);font:400 1.0625rem/1.7 var(--body);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* fixed nav with breadcrumb */
+.top{position:fixed;inset:0 0 auto 0;z-index:10;background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:calc(.7rem + env(safe-area-inset-top,0px)) 1.25rem .7rem}
+.top div{max-width:60rem;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;font:500 .92rem var(--body)}
+.crumb{color:var(--muted)}.crumb a{text-decoration:none;border-bottom:1px solid currentColor}.crumb a:hover,.crumb a:focus-visible{color:var(--ink)}.crumb b{color:var(--ink);font-weight:600}
+.top nav{display:flex;gap:1.1rem}
+.top nav a{text-decoration:none;border-bottom:2px solid transparent}
+.top nav a:hover,.top nav a:focus-visible{border-color:var(--ink)}
+@media (max-width:560px){.crumb .hide{display:none}.top nav{gap:.8rem}}
+
+main{max-width:60rem;margin:0 auto;padding:0 1.25rem 4rem}
+.hero{padding:9rem 0 4rem}
+.hero p.tag{display:inline-block;margin:0 0 1.2rem;background:var(--yellow);color:#2B1710;font:600 .95rem var(--body);padding:.3rem .8rem;border-radius:999px;transform:rotate(-2deg)}
+h1{font:700 clamp(2.6rem,8vw,5.2rem)/1 var(--disp);letter-spacing:-.03em;margin:0 0 1.2rem;max-width:16ch}
+.hero .sub{font:400 1.2rem/1.5 var(--body);max-width:34rem;margin:0}
+.hero .sub strong{font-weight:600}
+
+section{margin:0 0 3rem;background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:clamp(1.4rem,4vw,3rem);
+  box-shadow:0 30px 60px -30px rgba(43,23,16,.45)}
+h2{font:700 clamp(1.8rem,4vw,2.5rem)/1.1 var(--disp);letter-spacing:-.02em;margin:0 0 1.5rem}
+h3{font:700 1.25rem/1.3 var(--disp);margin:2rem 0 .6rem}
+p{margin:0 0 1rem;max-width:42rem}
+ul.plain{padding-left:1.2rem;margin:0 0 1rem;max-width:42rem}ul.plain li{margin-bottom:.5rem}
+mark{background:var(--yellow);color:#2B1710;padding:.05rem .35rem;border-radius:4px;outline:1px dashed rgba(43,23,16,.5)}
+
+/* personal snapshot and measurable goal */
+.snapshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin:1rem 0 1.5rem}
+.snapshot{background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.12);border-radius:16px;padding:1.1rem 1.2rem}
+.snapshot h4{font:700 1rem/1.3 var(--disp);margin:0 0 .55rem}
+.snapshot ul{margin:0;padding-left:1.15rem}
+.snapshot li{margin:.3rem 0}
+.goal{background:#FFF3C2;color:#2B1710;border:1px solid rgba(43,23,16,.12);border-left:6px solid #E8553D;border-radius:18px;padding:1.25rem 1.4rem;margin:1.2rem 0}
+.goal .eyebrow{display:block;text-transform:uppercase;letter-spacing:.09em;font:700 .78rem var(--body);color:#9B3F2E;margin-bottom:.45rem}
+.goal p{margin:0;max-width:48rem}
+.goal strong{color:#2B1710}
+
+
+/* timeline */
+.tl{list-style:none;margin:0 0 1.2rem;padding:0 0 0 1.6rem;border-left:3px solid var(--ink);max-width:42rem}
+.tl li{position:relative;padding:0 0 1.2rem}
+.tl li::before{content:"";position:absolute;left:-2.15rem;top:.4rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
+.tl b{display:block;font:700 1.15rem var(--disp)}
+.tl span{color:var(--muted)}
+
+/* tilted technique cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:1.4rem;margin:1.5rem 0 1rem;padding:.5rem}
+.card{margin:0;background:#FFFDF9;color:#2B1710;border-radius:18px;padding:1.2rem 1.3rem 1.3rem;border:1px solid rgba(43,23,16,.12);
+  box-shadow:0 18px 30px -14px rgba(43,23,16,.5);transform:rotate(var(--r,0deg));transition:transform .3s ease,box-shadow .3s ease}
+.card:hover,.card:focus-within{transform:rotate(0) translateY(-4px);box-shadow:0 26px 40px -16px rgba(43,23,16,.55)}
+.card .t{display:inline-block;background:var(--yellow);font:700 .9rem var(--disp);padding:.15rem .6rem;border-radius:6px;margin-bottom:.4rem}
+.card small{display:block;color:#6A4A3E;font:500 .88rem var(--body);margin-bottom:.6rem}
+.card q{display:block;font:500 1.05rem/1.5 var(--body);quotes:"«" "»"}
+.note{color:var(--muted)}
+
+/* links */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;list-style:none;padding:0;margin:0}
+.links a{display:block;height:100%;text-decoration:none;background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.14);border-radius:16px;padding:1rem 1.1rem;
+  font:700 1.05rem/1.3 var(--disp);transition:background .2s,transform .2s}
+.links a:hover,.links a:focus-visible{background:var(--yellow);transform:translateY(-3px)}
+.links small{display:block;font:400 .9rem var(--body);color:#6A4A3E;margin-top:.25rem}
+
+/* reveal on scroll (only when JS runs and motion is allowed) */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.card{transition:none}html{scroll-behavior:auto}}
+@media (max-width:560px){.hero{padding-top:7rem}.card{transform:rotate(calc(var(--r,0deg)/2))}}
+
+/* module 9 additions */
+.card .txt{margin:0;font:500 1.02rem/1.5 var(--body);max-width:none}
+ol.flow{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:.9rem 0 0;counter-reset:s}
+ol.flow li{counter-increment:s;background:#FFF3C2;border:1px solid rgba(43,23,16,.14);border-radius:12px;padding:.35rem .7rem;font:600 .9rem var(--body)}
+ol.flow li::before{content:counter(s) ". ";color:#9B3F2E;font-weight:700}
+.sub-h{font:600 1rem var(--body);color:var(--muted);margin:0 0 .6rem}
+
+/* module 10 additions */
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0 1rem;max-width:44rem}
+.matrix .q{background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.14);border-radius:16px;padding:.9rem 1.1rem}
+.matrix .q h4{font:700 1rem var(--disp);margin:0 0 .1rem}
+.matrix .q small{display:block;font:500 .85rem var(--body);color:#6A4A3E;margin-bottom:.4rem}
+.matrix .q ul{margin:0;padding-left:1.1rem;font:400 .92rem/1.45 var(--body)}
+.matrix .q.a{border-top:6px solid #E8553D}.matrix .q.b{border-top:6px solid #FFD23F}.matrix .q.c{border-top:6px solid #7B9ACC}.matrix .q.d{border-top:6px solid #B9AFA6}
+.tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin:1rem 0}
+.tri div{background:#FFFDF9;color:#2B1710;border:1px solid rgba(43,23,16,.14);border-radius:16px;padding:1rem 1.1rem}
+.tri h4{margin:0 0 .3rem;font:700 1.05rem var(--disp)}
+.tri p{margin:0;font:400 .95rem/1.5 var(--body)}
+.tri .bl{border-top:6px solid #3F7FD1}.tri .yl{border-top:6px solid #FFD23F}.tri .gr{border-top:6px solid #4CA66A}
+ul.chips{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:.6rem 0 1rem}
+ul.chips li{margin:0;background:#FFF3C2;color:#2B1710;border:1px solid rgba(43,23,16,.14);border-radius:999px;padding:.25rem .8rem;font:600 .9rem var(--body)}
+@media (max-width:560px){.matrix{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="top"><div>
+  <span class="crumb"><a href="index.html">Portafoli</a> <span class="hide">/ Mòdul 10</span> / <b id="here">Inici</b></span>
+  <nav aria-label="Seccions"><a href="#idees">Idees clau</a><a href="#practica">Pràctica</a><a href="#materials">Materials</a></nav>
+</div></header>
+
+<main>
+<div class="hero" data-sec="Inici">
+  <p class="tag">Portafoli DIN2 · Formació inicial per a l'exercici de la funció directiva</p>
+  <h1>Mòdul 10. Gestió del temps</h1>
+  <p class="sub"><strong>Sandra Vallès</strong> · Cap d'estudis</p>
+</div>
+
+<section id="idees" data-sec="Idees clau" class="rv">
+<h2>Idees clau del mòdul</h2>
+
+<h3>Autoconeixement i hàbits</h3>
+<p>Vam llegir el document sobre gestió del temps i vam fer un qüestionari d'autoconeixement, individual i en grup. Del debat, el que jo canviaria:</p>
+<ul class="chips"><li>Fer pauses freqüents</li><li>Prioritzar tasques</li><li>Desconnexió digital</li><li>Delegar</li><li>Tenir agenda</li></ul>
+<p>Com a direcció cal tenir una mirada ampla, fer el seguiment de les tasques dels coordinadors i buscar la fórmula que a cadascú li funcioni.</p>
+
+<h3>La matriu d'Eisenhower</h3>
+<p>La matriu d'Eisenhower és una eina de gestió del temps que serveix per organitzar les tasques segons la seva importància i urgència. Ajuda a decidir què has de fer primer, què pots planificar, què pots delegar i què pots eliminar.</p>
+<p>Rep el nom del president dels Estats Units Dwight D. Eisenhower, que va dir que el que és important rarament és urgent i el que és urgent rarament és important.</p>
+<p>Vaig classificar tasques del meu dia a dia:</p>
+<div class="matrix">
+  <div class="q a"><h4>Urgent i important</h4><small>Fer-ho ara: tasques que necessiten atenció immediata.</small><ul><li>Substituir un professor absent a primera hora</li><li>Atendre un professor substitut</li></ul></div>
+  <div class="q b"><h4>Important, no urgent</h4><small>Planificar: tasques importants que pots programar.</small><ul><li>Preparar avaluacions a Esfera</li></ul></div>
+  <div class="q c"><h4>Urgent, no important</h4><small>Delegar: tasques que reclamen atenció però aporten poc valor.</small><ul><li>Cap de les que he classificat</li></ul></div>
+  <div class="q d"><h4>Ni urgent ni important</h4><small>Eliminar: tasques que no aporten gaire valor.</small><ul><li>Revisar el correu sense un objectiu concret</li><li>Planificar la jornada de portes obertes</li><li>Reunions logístiques que podria resoldre la secretaria</li><li>Imprimir o revisar documentació menor</li><li>Preparar informes que ningú ha demanat</li><li>Repetir tasques que ja ha fet algú de l'equip</li></ul></div>
+</div>
+<p>Sis de les nou tasques són ni urgents ni importants, i només una és important sense ser urgent. Em mostra on guanyar temps: reduir el que no aporta i reservar-lo per al que és important, com el lideratge pedagògic.</p>
+
+<h3>Els tres temps del centre</h3>
+<div class="cards">
+  <figure class="card" style="--r:-1.5deg"><span class="t">Temps institucional</span><small>Calendari, horaris i reunions</small><p class="txt">El criteri d'elaboració dels horaris ha de ser pedagògic, públic i aprovat pel claustre.</p></figure>
+  <figure class="card" style="--r:1.5deg"><span class="t">Temps professional</span><small>Jornada, tasques i responsabilitats</small><p class="txt">Es regeix per l'equitat i la transparència.</p></figure>
+  <figure class="card" style="--r:-1deg"><span class="t">Temps personal i estratègic</span><small>Desconnexió i lideratge pedagògic</small><p class="txt">El lideratge pedagògic necessita calma i perspectiva: el temps per fer-lo és imprescindible.</p></figure>
+</div>
+<h3>Què diu la normativa (DOIGC)</h3>
+<div class="snapshot-grid">
+  <div class="snapshot"><h4>Què estableix</h4><ul>
+    <li>L'horari respon a criteris pedagògics del projecte educatiu i de la programació general anual.</li>
+    <li>Els criteris s'incorporen a les normes d'organització i funcionament i els aprova el claustre.</li>
+    <li>Cada membre de l'equip directiu dedica 35 hores setmanals al centre, i en horari lectiu hi ha d'haver sempre un càrrec directiu present.</li></ul></div>
+  <div class="snapshot"><h4>Marge de la direcció</h4><ul>
+    <li>L'equip directiu elabora l'horari i la direcció el concreta, un cop escoltat el claustre.</li>
+    <li>La direcció l'aprova provisionalment, el claustre en revisa l'adequació i l'horari definitiu s'aprova a la programació general anual.</li>
+    <li>El marge és ampli, però dins del projecte educatiu, el projecte de direcció i la normativa.</li></ul></div>
+  <div class="snapshot"><h4>Com ho explicaré al centre</h4><ul>
+    <li>Criteris d'horaris per escrit, aprovats pel claustre i públics.</li>
+    <li>Difusió dins el pla de comunicació del centre.</li>
+    <li>Un horari amb prou temps per a la coordinació i l'atenció tutorial.</li></ul></div>
+</div>
+<p>La normativa demana almenys un càrrec directiu present en horari lectiu. La meva proposta de dos per franja va més enllà d'aquest mínim, i caldrà veure si és viable amb els horaris de l'equip.</p>
+
+<h3>El valor del meu temps: els tres colors</h3>
+<div class="tri">
+  <div class="bl"><h4>Blau · valuós</h4><p>Fer horaris, escoltar i ajudar els companys, millorar els documents del centre.</p></div>
+  <div class="yl"><h4>Groc · em desgasta</h4><p>Haver de vigilar que el professorat sigui puntual.</p></div>
+  <div class="gr"><h4>Verd · vull preservar</h4><p>Moments de treball a casa i reunions d'equip directiu.</p></div>
+</div>
+<p>En un mural vam connectar cinc fotografies d'espais que ens fan sentir bé, laborals i personals, per formar la nostra «jornada laboral».</p>
+
+<h3>Delegar</h3>
+<p>Delegar és clau, i la responsabilitat final sempre és de la direcció. Les barreres més habituals són la necessitat de control, la manca de confiança i la dificultat per distribuir tasques. Delegar també és cuidar: deixar fer, acompanyar i confiar.</p>
+<ul class="chips"><li>Claredat: objectiu i límits</li><li>Suport: recursos i acompanyament</li><li>Confiança: marge de decisió</li><li>Seguiment: retorn sense microgestió</li></ul>
+</section>
+
+<section id="practica" data-sec="Pràctica" class="rv">
+<h2>Del mòdul a la pràctica</h2>
+
+<h3>Una decisió que voldria aplicar</h3>
+<ul class="plain">
+  <li><strong>Reunions setmanals fixes i flexibles.</strong> Un espai estable per als equips docents i de coordinació; quan no calgui tot l'equip, es poden fer reunions en parelles o petits grups.</li>
+  <li><strong>Presència de l'equip directiu.</strong> Sempre que es pugui, almenys dos membres presents a cada franja horària.</li>
+  <li><strong>Delegar.</strong> Crear equips de treball i repartir tasques de manera equilibrada, per optimitzar el temps de l'equip directiu i fomentar la implicació del professorat.</li>
+</ul>
+
+<h3>Una connexió amb el mòdul 8</h3>
+<p>Al mòdul 8 vaig proposar fer públics els criteris d'assignació d'horaris. Ara veig que no és només una manera de comunicar millor: és el que demana el DOIGC: l'horari ha de ser pedagògic, públic i aprovat pel claustre, i s'ha de difondre en el marc del pla de comunicació del centre.</p>
+
+<h3>Reflexió final</h3>
+<p>Aquest mòdul m'ha fet veure el temps com un recurs estratègic del lideratge. La matriu d'Eisenhower m'ha mostrat que sis de les nou tasques analitzades no són ni urgents ni importants, i que puc alliberar aquest temps per al que és important: planificar, prevenir i fer lideratge pedagògic. Delegar no és perdre el control, sinó cuidar, sempre amb claredat, suport, confiança i seguiment. I un horari amb criteris pedagògics, públics i aprovats pel claustre organitza el temps amb equitat i transparència. M'emporto el compromís de prioritzar abans de reaccionar.</p>
+</section>
+
+<section id="materials" data-sec="Materials" class="rv">
+<h2>Materials</h2>
+<ul class="links">
+  <li><a href="https://docs.google.com/document/d/1_Pt-lBrwJ-YE4_BFenQ7D3gEYT2I_pgi3k7DQrfUYUc/edit" target="_blank" rel="noopener">Gestió del temps<small>Document de lectura</small></a></li>
+  <li><a href="https://docs.google.com/document/d/1wVPzYdehWXCig6G3vXYWCIiH_lT4CrMdEitYMHsjhjs/edit" target="_blank" rel="noopener">Qüestionari d'autoconeixement<small>Individual</small></a></li>
+  <li><a href="https://docs.google.com/document/d/16ZVX1wn4h7QSRW1cZC27zIiChEMm2tmErN5n3Pt8Mpw/edit" target="_blank" rel="noopener">Qüestionari d'autoconeixement<small>En grup</small></a></li>
+  <li><a href="https://docs.google.com/document/d/1yCpSzWC-RDpkn1I45pA5ptCha4Ue1mt8ddsQboYJgNM/edit" target="_blank" rel="noopener">La matriu d'Eisenhower<small>Document de lectura</small></a></li>
+  <li><a href="https://docs.google.com/document/d/1qqfmbMG4OuarvNNAQWJWcD_BwCC_pD5g/edit" target="_blank" rel="noopener">Els colors del meu temps<small>Activitat</small></a></li>
+  <li><a href="https://docs.google.com/document/d/1-w66FAexWox-jJLGz66QzsIEeDKxQ19IvP0Zj4L_kKg/edit" target="_blank" rel="noopener">Supòsit pràctic<small>Activitat 5</small></a></li>
+  <li><a href="https://drive.google.com/file/d/1fy1v0mEUoFvkB6tU13I9PlFHPCyExisF/view" target="_blank" rel="noopener">DOIGC · Organització del temps escolar<small>Departament d'Educació</small></a></li>
+  <li><a href="https://drive.google.com/file/d/10dm9gSQXDdWkjWtW1wMNJOVqyBWkXyUw/view" target="_blank" rel="noopener">DOIGC · Òrgans unipersonals de direcció i de coordinació<small>Departament d'Educació</small></a></li>
+  <li><a href="https://drive.google.com/file/d/1qhGoxqfxARf8w5EDfHX_sb-YSkgJI-Dy/view" target="_blank" rel="noopener">Mural: la meva jornada laboral<small>Fotografia de l'activitat</small></a></li>
+</ul>
+</section>
+</main>
+
+<script>
+(function(){
+  var here=document.getElementById('here');
+  var secs=[].slice.call(document.querySelectorAll('[data-sec]'));
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});return}
+  var reveal=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');reveal.unobserve(e.target)}})},{threshold:.08});
+  document.querySelectorAll('.rv').forEach(function(e){reveal.observe(e)});
+  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){here.textContent=e.target.getAttribute('data-sec')}})},{rootMargin:'-35% 0px -55% 0px'});
+  secs.forEach(function(s){spy.observe(s)});
+})();
+</script>
+</body>
+</html>
